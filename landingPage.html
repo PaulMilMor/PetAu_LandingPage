@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Importar bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--Importar Material Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!--Importar Fuente Roboto-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!--Importar JQuery-->
+    <script src="jquery-3.5.1.min.js"></script>
+    <style type="text/css">
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /*Las alertas salen en la parte de abajo de la pantalla*/
+        .alert-fixed {
+            position: fixed;
+            bottom: 0px;
+            width: 75%;
+            z-index: 9999;
+        }
+
+        .bg-success {
+            background-color: #23E750 !important;
+        }
+
+        .btn-success {
+            background-color: #23E750;
+            border-color: #23E750;
+        }
+
+        .card {
+            width: auto;
+            height: 350px;
+        }
+
+        /*Los botones del carrusel están personalizados para verse bien*/
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            height: 100px;
+            width: 100px;
+            outline: black;
+            background-size: 100%, 100%;
+            background-image: none;
+        }
+
+        .carousel-control-next-icon:after {
+            content: '▶';
+            font-size: 35px;
+            color: black;
+        }
+
+        .carousel-control-prev-icon:after {
+            content: '◀';
+            font-size: 35px;
+            color: black;
+        }
+
+
+        .dropdown {
+            background-color: #23E750 !important;
+
+        }
+
+        .dropdown .active {
+            background-color: white !important;
+        }
+
+        .dropdown a {
+            color: white !important;
+        }
+
+        .jumbotron-image {
+            background-image: url("https://images.unsplash.com/photo-1578133559556-9e83af5fc5f3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
+            background-size: cover;
+
+            height: 900px;
+        }
+
+        /*Es necesario esta clase para usar Material Icons*/
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            /* Preferred icon size */
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        /*Esta clase es para los iconos de las tarjetas*/
+        .mat-icons-cards {
+            height: 100px;
+            width: 100px;
+            background-color: white;
+            color: #23E750;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 50px;
+        }
+
+        .mat-icons-cards span {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 50px;
+
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0);
+
+        }
+
+        .navbar li {
+            margin-right: 10px !important;
+        }
+
+
+        .navbar.scrolled {
+            background-color: #fff !important;
+            transition: background-color 400ms linear;
+        }
+
+        .nav-link {
+            color: black impor !important;
+        }
+
+        .nav-link:hover {
+
+            color: #23E750 !important;
+            background-color: white !important;
+        }
+
+        .nav-link.active {
+            background-color: white !important;
+            color: #23E750 !important;
+        }
+
+
+
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            color: #23E750 !important;
+            background-color: white !important;
+        }
+
+        /*Esta clase es para los enlaces insertados en un texto*/
+        .p-link {
+            color: #23E750;
+        }
+
+        .p-link:hover {
+            color: #23E750;
+            text-decoration: underline;
+        }
+
+        /*Esta clase delimita cada sección dentro de la página*/
+        .section {
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        /*Esta clase es para ayudar a la responsividad de la página*/
+        @media screen and (max-width:720px) {
+            .title-card {
+                background-color: white;
+            }
+
+            .card {
+                width: auto;
+                height: 500px;
+            }
+
+            .card-text {
+
+                font-size: 1rem !important;
+            }
+        }
+    </style>
+    <title>PetAuxilium Landing Page</title>
+</head>
+
+<body>
+    <!--Aquí van las alerts-->
+    <div class="container">
+        <div id="resultados"></div>
+    </div>
+    <!--Barra de navegación-->
+    <!--Barra con opciones-->
+    <nav id="navbar-petauxilium" class="navbar navbar-light fixed-top navbar-expand-lg">
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+            aria-controls="navbarToggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <a class="navbar-brand font-weight-bold" href="#">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/millanes-frontend.appspot.com/o/logo_asset.png?alt=media&token=0bf4be90-8002-4821-8531-97c8bcf4e340"
+                        alt="" width="50"> PetAuxilium</a>
+                <ul class="nav nav-pills navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#quees">¿Qué es?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#caracteristicas">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#porque">¿Por qué?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#descarga">Descarga</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Inicia Sesión</a>
+                        <div class="dropdown-menu">
+
+                            <!--Formulario-->
+                            <!--Formulario para iniciar sesión-->
+                            <form class="p-4" style="width: 250px;" onsubmit="return false;">
+                                <div class="form-group">
+                                    <label for="DropdownFormEmail">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="DropdownFormEmail"
+                                        placeholder="email@ejemplo.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="DropdownFormPassword">Contraseña</label>
+                                    <input type="password" class="form-control" id="DropdownFormPassword"
+                                        placeholder="Contraseña">
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                    <label class="form-check-label" for="dropdownCheck">
+                                        Recuérdame
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-success" id="send-btn">Iniciar sesión</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Scrollspy-->
+    <div data-spy="scroll" data-target="#navbar-petauxilium" data-offset="0">
+        <!--Jumbotron-->
+        <div class="jumbotron jumbotron-fluid jumbotron-image">
+            <div class="container">
+                <div class="row">
+                    <!--Tooltip-->
+                    <div class="col-md-6" data-toggle="tooltip" data-placement="bottom"
+                        title="Shiba Inu (Foto de Jaycee Xie en Unsplash)" style="height: 400px;">
+
+                    </div>
+                    <div class="col-md-6 title-card">
+                        <div style="height:150px"></div>
+                        <h1 class="display-4 font-weight-bold">PetAuxilium</h1>
+                        <p class="lead">La comunidad de asistencia animalista por excelencia; hazlo a tu manera, hazlo
+                            PetAuxilium.</p>
+                        <hr class="my-4">
+                        <p>Registra tu correo para recibir las últimas actualizaciones.
+                        </p>
+                        <p class="lead">
+                            <!--Formulario para suscribirse-->
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="email@ejemplo.com"
+                                aria-label="Correo de registro" aria-describedby="basic-addon2" id="subscribe-email">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="button" id="register-btn">Registrar</button>
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Explicación de la App-->
+        <div id="quees" class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!--Tooltip-->
+                        <img data-toggle="tooltip" data-placement="bottom" title="Capturas de la App"
+                            src="https://firebasestorage.googleapis.com/v0/b/millanes-frontend.appspot.com/o/whatis.png?alt=media&token=f53a1573-21a1-4245-a451-55d192fb2603"
+                            alt="Capturas de la App" class="img-fluid rounded">
+
+                    </div>
+                    <div class="col-md-6 my-auto">
+                        <h1 class="font-weight-bold">¿Qué es <span style="color: #23E750">PetAuxilium</span>?</h1>
+                        <br>
+                        <p>PetAuxilium es una app que proporciona la posibilidad de brindar asistencia a animales
+                            callejeros y mascotas a través de una comunidad por la cual es posible compartir reportes,
+                            brindar cuidados y ofrecer o solicitar distintos servicios relacionados con el cuidado
+                            animal.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Explicación de la app-->
+        <div id="caracteristicas" class="section" style="background-color:#ebebeb;">
+            <div class="container">
+                <h1 class="font-weight-bold">Características</h1>
+            </div>
+            <!--Carrusel-->
+            <div id="carouselIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
+                <div class="carousel-inner container">
+                    <!--Todos los elementos del carrusel son card-decks-->
+                    <div class="carousel-item active">
+                        <div class="card-deck">
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            groups
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Únete a una
+                                        comunidad de amigos y conocedores de los animales en tu localidad.</p>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            article
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Entérate de las
+                                        últimas novedades animalistas en tu entorno.</p>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            location_on
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Descubre negocios
+                                        y eventos cerca de ti.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card-deck">
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            help
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Busca tus animales
+                                        perdidos.</p>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            home
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Encuentra un nuevo
+                                        hogar para tus amigos peludos.</p>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            business
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Publica tu negocio
+                                        y date a conocer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card-deck">
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            accessibility
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Descubre cómo
+                                        ayudar a los animales de tu comunidad.</p>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            chat
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Conecta con otras
+                                        personas directamente.</p>
+                                </div>
+                            </div>
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+
+                                    <div class="mat-icons-cards">
+                                        <span class="material-icons">
+                                            dangerous
+                                        </span>
+                                    </div>
+                                    <br><br>
+                                    <p class="card-text font-weight-bold" style="font-size: x-large;">Reporta maltratos
+                                        y cuida de tus mascotas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+        </div>
+        <!--Explicación de la app-->
+        <div id="porque" class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!--Tooltip-->
+                        <img data-toggle="tooltip" data-placement="bottom"
+                            title="Calico (Foto de Tim van der Kuip en Unsplash)"
+                            src="https://firebasestorage.googleapis.com/v0/b/millanes-frontend.appspot.com/o/whyis.png?alt=media&token=d69f806d-74b9-4038-a74b-71559a504452"
+                            alt="Calico (Foto de Tim van der Kuip en Unsplash)" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-6 my-auto">
+                        <h1 class="font-weight-bold">¿Por qué <span style="color:#23E750">unirse</span> a la comunidad?
+                        </h1>
+                        <br>
+                        <p>
+                            <!--Tooltip-->
+                            <a target="_blank" class="p-link" data-toggle="tooltip" data-placement="top"
+                                title="Artículo de Vetme, hospital veterinario"
+                                href="https://vetme.com.mx/consejos-vetme/mexico-1er-lugar-en-poblacion-de-perros-callejeros/">En
+                                México existen cerca de 16 millones de perros en situación de calle.</a> Las últimas
+                            estadísticas recopiladas ubican a México en el tercer lugar en Latinoamerica respecto a
+                            maltrato animal y primer lugar en población de perros callejeros. Este es un problema que no
+                            solo afecta a los animales, sino que también afecta la salud pública, generando grandes
+                            focos de infección.
+                        </p>
+                        <p>
+                            PetAuxilium tiene el objetivo de unir comunidades y conectar personas para ser parte de un
+                            movimiento social que permita mejorar la calidad de vida de los animales y crear conciencia
+                            para los hábitos y cuidados que debemos tener con nuestros amigos peludos. Unidos, podemos
+                            hacer la diferencia.
+                        </p>
+                        <br>
+                        <!--Blockquote-->
+                        <blockquote class="blockquote text-right">
+                            <p class="mb-0"><i>"Podemos juzgar el corazón de un hombre por la manera en que trata a los
+                                    animales."</i></p>
+                            <footer class="blockquote-footer">Immanuel Kant</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Descarga de la app-->
+        <div id="descarga" class="section" style="background-color:#ebebeb;">
+
+            <div class="container">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <!--Tooltip-->
+                    <img data-toggle="tooltip" data-placement="top" title="Hazlo a tu manera, hazlo PetAuxilium :)"
+                        classs="img-responsive"
+                        src="https://firebasestorage.googleapis.com/v0/b/millanes-frontend.appspot.com/o/logo_asset.png?alt=media&token=0bf4be90-8002-4821-8531-97c8bcf4e340"
+                        alt="PetAuxilium" width="250">
+                    <h1 class="display-4 font-weight-bold">Descarga</h1>
+
+                    <p class="lead" style="text-align: center;">Hay toda una comunidad de personas, animales y negocios
+                        esperando por ti. Únete, conecta con la comunidad y haz tu aportación para cuidar a los
+                        animales. ¿Qué estás esperando?</p>
+                    <hr>
+                    <p class="lead">
+
+                        <button class="btn btn-success btn-lg" type="button" id="download-btn">Descargar para
+                            Android</button>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Footer-->
+    <footer class="page-footer font-small">
+
+        <div class="text-center py-3">© 2021 PetAuxilium,
+            actualmente en desarrollo por FS Development
+        </div>
+
+    </footer>
+    <!--Importes de bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!--Manejo de eventos por JQuery-->
+    <script type="text/javascript">
+        /*Esto es para que al darle scroll se vuelva sólida la navbar*/
+        $('body').scrollspy({ target: '#navbar-petauxilium' });
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $(".navbar");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > 200);
+            });
+            var $nav = $(".navbar");
+            $nav.toggleClass('scrolled', $(this).scrollTop() > 200);
+        });
+        /*Esto es para validar los campos en el formulario de inicio de sesión*/
+        $("#send-btn").click(function () {
+            var mensajeError = "";
+            function isEmail(email) {
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                return regex.test(email);
+            } if ($("#DropdownFormEmail").val() == "") {
+                mensajeError = mensajeError + "El email no puede estar vacío.<br>";
+            } else if (!isEmail($("#DropdownFormEmail").val())) {
+                mensajeError = mensajeError + "Correo electrónico no válido. <br>"
+            } if ($("#DropdownFormPassword").val() == "") {
+                mensajeError = mensajeError + "La contraseña no puede estar vacía.<br>";
+            } if (mensajeError != "") {
+                mensajeError = "<div class=\"alert alert-danger alert-dismissible fade show alert-fixed\" role=\"alert\"><p><strong>Hubo algún error en el formulario:</strong></p>" + mensajeError + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
+                $("#resultados").html(mensajeError);
+            }
+            else {
+                $("#resultados").html(
+                    "<div class=\"alert alert-success alert-dismissible fade show alert-fixed\" role=\"alert\">" + "Ha ingresado correctamente<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>"
+                );
+            }
+        });
+        /*Esto es para validar el correo en el formulario para suscribirse*/
+        $("#register-btn").click(function () {
+            var mensajeError = "";
+            function isEmail(email) {
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                return regex.test(email);
+            } if ($("#subscribe-email").val() == "") {
+                mensajeError = mensajeError + "Ingresa un correo.<br>";
+            } else if (!isEmail($("#subscribe-email").val())) {
+                mensajeError = mensajeError + "Correo electrónico no válido. <br>"
+            } if (mensajeError != "") {
+                mensajeError = "<div class=\"alert alert-danger alert-dismissible fade show alert-fixed\" role=\"alert\">" + mensajeError + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>";
+                $("#resultados").html(mensajeError);
+            }
+            else {
+                $("#resultados").html(
+                    "<div class=\"alert alert-success alert-dismissible fade show alert-fixed\" role=\"alert\">" + "Se le envió un correo de confirmación a <strong>" + $("#subscribe-email").val() + "</strong><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>"
+                );
+            }
+        });
+        /*Tooltips*/
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        /*Esto es para mostrar una alerta al momento de hacer click en descargar*/
+        $("#download-btn").click(function () {
+
+            $("#resultados").html(
+                "<div class=\"alert alert-success alert-dismissible fade show alert-fixed\" role=\"alert\">" + "PetAuxilium aún no está disponible pero puedes descargar nuestra aplicación hermana Pets Finder <a target=\"_blank\" class=\"alert-link\" href=\"https://play.google.com/store/apps/details?id=com.qusoft.petfinder\"> haciendo clic aquí </a><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div>"
+            );
+
+        });
+    </script>
+</body>
+
+</html>
